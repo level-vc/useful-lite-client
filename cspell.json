@@ -1,0 +1,15 @@
+{
+    "version": "0.2",
+    "ignorePaths": [".gitignore", "test/expected_outputs/**", "*.ipynb", ".json"],
+    "dictionaryDefinitions": [
+        {
+            "name": "custom-dictionary",
+            "path": "./.cspell/custom-dictionary.txt",
+            "addWords": true
+        }
+    ],
+    "dictionaries": ["custom-dictionary"],
+    "words": [],
+    "ignoreWords": ["FAJKRD", "GTQV", "PRUQQP", "PSYR"],
+    "import": []
+}

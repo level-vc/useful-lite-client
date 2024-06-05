@@ -1,0 +1,81 @@
+[tool.poetry]
+name = "useful-machines"
+version = "0.0.4"
+description = "The python sdk for useful."
+license = "MIT"
+authors = [
+    "Leo Scholler <leonardo.scholler@poatek.com>",
+    "Liam Shalon <liam@levelvc.com>",
+    "Dev Dabke <dev@levelvc.com>",
+]
+readme = "README.md"
+homepage = "https://github.com/level-vc/useful"
+repository = "https://github.com/level-vc/useful.git"
+packages = [{ include = "useful" }]
+
+[tool.poetry.dependencies]
+python = "^3.9.0,<3.13"
+ipython = {extras = ["get-ipython"], version = "^8.5.0"}
+nest-asyncio = "^1.5.8"
+numpy = [
+    {version = "<=1.22.0", python = "<3.10"},
+    {version = "^1.26.0", python = ">=3.10,<3.12"},
+    {version = "^1.24.0,<=1.26.0", python = ">=3.12"},
+]
+pandas = [
+    { version = "^2.1.4", python = ">=3.10" },
+    { version = "<2.1", python = "<3.10" }
+]
+pydantic = "^2.5.2"
+requests = "^2.31.0"
+
+[tool.poetry.group.dev]
+optional = true
+
+[tool.poetry.group.dev.dependencies]
+boto3 = "^1.33.11"
+deptry = "^0.12.0"
+ipykernel = "^6.27.1"
+pdoc3 = "^0.10.0"
+pre-commit = "^3.6.0"
+pytest = "~7.1.0"
+coverage = { version = "<7.4", python = "<3.10" }
+pytest-cov = [
+    { version = "^4.1.0", python = ">=3.10" },
+    { version = "<4.1.0", python = "<3.10" }
+]
+ruff = "^0.1.7"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.ruff.lint]
+select = [
+    "B",
+    "C4",
+    "D",
+    "E",
+    "F",
+    "I",
+    "ISC",
+    "N",
+    "PGH",
+    "PL",
+    "PTH",
+    "Q",
+    "S",
+    "SIM",
+    "TRY",
+    "UP",
+    "W",
+    "YTT",
+    "RUF100",
+]
+ignore = ["D203", "D212", "TRY003"]
+
+[tool.ruff.per-file-ignores]
+"test/*.py" = ["S101"]
+
+[tool.ruff.lint.pydocstyle]
+convention = "google"
