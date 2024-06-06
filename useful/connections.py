@@ -5,56 +5,20 @@ import concurrent
 import logging
 from concurrent.futures import ProcessPoolExecutor
 from concurrent.futures.process import BrokenProcessPool
-from typing import Dict, List, Union
 
 import nest_asyncio
 import requests
 from pydantic import BaseModel
 
 
-class Job(BaseModel):
-    """A representation of a single job."""
+class FunctionError(BaseModel):
+    """A representation of a function error data."""
 
-    job: str
-    job_timestamp: int
-    workflow_id: Union[str, None]
-    workflow_thread: Union[List[str], None]
-
-
-class FunctionData(BaseModel):
-    """A representation of a function data."""
-
-    arguments: str
-    arguments_dtypes: Dict[str, str]
-    standalone_check_name: Union[str, None]
-    number_of_return_arguments: Union[int, None]
-    code: Union[str, None]
-    line_start: Union[int, None]
-    git_url: Union[str, None]
-    blame: Union[str, None]
-    caller: Union[str, None]
-
-
-class Function(BaseModel):
-    """A representation of a function."""
-
-    name: str
-    job: str
-    job_timestamp: int
-    finished_at: int
+    function_name: str
+    function_file: str
     started_at: int
-    error: Union[str, None]
-    data: Union[FunctionData, None]
-
-
-class Statistic(BaseModel):
-    """A representation of a statistic."""
-
-    job: str
-    job_timestamp: int
-    name: str
-    return_order: Union[int, None]
-    features: Dict[str, Dict[str, Union[int, float, str]]]
+    finished_at: int
+    error: str
 
 
 # Enable multithreading inside multithreading like IPython kernel and parallel tasks
@@ -71,15 +35,15 @@ class CloudLogger:
         if api_key is None:
             raise RuntimeError(
                 "Authentication needed. Generate a key at: "
-                "https://app.usefulmachines.dev/"
+                "https://usefulmachines.dev/"
             )
 
         self.api_key = api_key
         self.tasks = []
         self.API_ENDPOINT = (
-            "https://2gm2ujvge3.execute-api.us-east-2.amazonaws.com/dev/upload"
+            "https://8o2881lhg6.execute-api.us-east-2.amazonaws.com/prod"
             if dev_mode
-            else "https://api.usefulmachines.dev/upload"
+            else "https://8o2881lhg6.execute-api.us-east-2.amazonaws.com/prod"
         )
 
     def upload_task(self, endpoint, data):
@@ -109,20 +73,10 @@ class CloudLogger:
         """Wait for all tasks to finish."""
         asyncio.run(self.__wait_async())
 
-    def upload_job(self, data: Job):
-        """Upload a job to the cloud."""
-        logging.info(f"[UPLOAD JOB CALLED]: {data}")
-        self.tasks.append(("/job", data.model_dump_json(exclude_none=True)))
-
-    def upload_function(self, data: Function):
-        """Upload a function to the cloud."""
-        logging.info(f"[UPLOAD FUNC CALLED]: {data}")
-        self.tasks.append(("/function", data.model_dump_json(exclude_none=True)))
-
-    def upload_statistic(self, data: Statistic):
-        """Upload a statistic to the cloud."""
-        logging.info(f"[UPLOAD STAT CALLED]: {data}")
-        self.tasks.append(("/statistic", data.model_dump_json(exclude_none=True)))
+    def upload_error(self, data: FunctionError):
+        """Upload a function error to the cloud."""
+        logging.info(f"[Useful] Upload error called with data: {data}")
+        self.tasks.append(("/error", data.model_dump_json(exclude_none=True)))
 
 
 class FakeCloudLogger:
@@ -136,14 +90,7 @@ class FakeCloudLogger:
         """Simulate a wait."""
         pass
 
-    def upload_job(self, data):
-        """Simulate an upload job."""
-        self.all_data.append(data.model_dump_json(exclude_none=True))
-
-    def upload_function(self, data):
-        """Simulate an upload function."""
-        self.all_data.append(data.model_dump_json(exclude_none=True))
-
-    def upload_statistic(self, data):
-        """Simulate an upload statistic."""
+    def upload_error(self, data):
+        """Simulate an function error upload to the cloud."""
+        logging.info(f"[Useful] Upload error called with data: {data}")
         self.all_data.append(data.model_dump_json(exclude_none=True))

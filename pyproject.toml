@@ -1,6 +1,6 @@
 [tool.poetry]
-name = "useful-machines"
-version = "0.0.4"
+name = "useful-machines-lite"
+version = "0.0.99"
 description = "The python sdk for useful."
 license = "MIT"
 authors = [
@@ -9,8 +9,8 @@ authors = [
     "Dev Dabke <dev@levelvc.com>",
 ]
 readme = "README.md"
-homepage = "https://github.com/level-vc/useful"
-repository = "https://github.com/level-vc/useful.git"
+homepage = "https://github.com/level-vc/useful-lite-client"
+repository = "https://github.com/level-vc/useful-lite-client.git"
 packages = [{ include = "useful" }]
 
 [tool.poetry.dependencies]
