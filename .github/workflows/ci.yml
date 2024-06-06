@@ -29,6 +29,8 @@ jobs:
                     && poetry install --with dev --no-interaction
 
             - name: Run Tests (Python)
+              env: # Or as an environment variable
+                USEFUL_API_KEY: ${{ secrets.USEFUL_API_KEY }}
               run: make test
 
             - name: Lint (Python)
