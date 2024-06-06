@@ -1,6 +1,10 @@
 """Test suite for the Useful class."""
 
+from dotenv import load_dotenv
+
 import useful
+
+load_dotenv()
 
 
 def test_error():

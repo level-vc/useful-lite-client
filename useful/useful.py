@@ -50,11 +50,11 @@ def check(
             except Exception as e:
                 # [end] function log here
                 payload = FunctionError(
-                    function_name=str(func.__name__),
-                    function_file=str(inspect.getfile(func)),
-                    started_at=int(started_at),
-                    finished_at=int(__get_current_micros()),
-                    error=str(traceback.format_exc()),
+                    function_name=func.__name__,
+                    function_file=inspect.getfile(func),
+                    started_at=started_at,
+                    finished_at=__get_current_micros(),
+                    error=traceback.format_exc(),
                 )
                 print(payload)
                 logger.upload_error(payload)

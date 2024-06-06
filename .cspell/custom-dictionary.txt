@@ -37,3 +37,4 @@ applymap
 astype
 ndarray
 ipynb
+dotenv

@@ -17,6 +17,7 @@ packages = [{ include = "useful" }]
 python = "^3.9.0,<3.13"
 nest-asyncio = "^1.5.8"
 pydantic = "^2.5.2"
+python-dotenv = "^1.0.1"
 requests = "^2.31.0"
 
 [tool.poetry.group.dev]
@@ -24,12 +25,12 @@ optional = true
 
 [tool.poetry.group.dev.dependencies]
 boto3 = "^1.33.11"
+coverage = { version = "<7.4", python = "<3.10" }
 deptry = "^0.12.0"
 ipykernel = "^6.27.1"
 pdoc3 = "^0.10.0"
 pre-commit = "^3.6.0"
 pytest = "~7.1.0"
-coverage = { version = "<7.4", python = "<3.10" }
 pytest-cov = [
     { version = "^4.1.0", python = ">=3.10" },
     { version = "<4.1.0", python = "<3.10" }
