@@ -15,17 +15,7 @@ packages = [{ include = "useful" }]
 
 [tool.poetry.dependencies]
 python = "^3.9.0,<3.13"
-ipython = {extras = ["get-ipython"], version = "^8.5.0"}
 nest-asyncio = "^1.5.8"
-numpy = [
-    {version = "<=1.22.0", python = "<3.10"},
-    {version = "^1.26.0", python = ">=3.10,<3.12"},
-    {version = "^1.24.0,<=1.26.0", python = ">=3.12"},
-]
-pandas = [
-    { version = "^2.1.4", python = ">=3.10" },
-    { version = "<2.1", python = "<3.10" }
-]
 pydantic = "^2.5.2"
 requests = "^2.31.0"
 
