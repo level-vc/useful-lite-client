@@ -41,9 +41,9 @@ class CloudLogger:
         self.api_key = api_key
         self.tasks = []
         self.API_ENDPOINT = (
-            "https://8o2881lhg6.execute-api.us-east-2.amazonaws.com/prod"
+            "https://8o2881lhg6.execute-api.us-east-2.amazonaws.com/prod/error"
             if dev_mode
-            else "https://8o2881lhg6.execute-api.us-east-2.amazonaws.com/prod"
+            else "https://8o2881lhg6.execute-api.us-east-2.amazonaws.com/prod/error"
         )
 
     def upload_task(self, endpoint, data):
@@ -76,7 +76,7 @@ class CloudLogger:
     def upload_error(self, data: FunctionError):
         """Upload a function error to the cloud."""
         logging.info(f"[Useful] Upload error called with data: {data}")
-        self.tasks.append(("/error", data.model_dump_json(exclude_none=True)))
+        self.tasks.append(("/email", data.model_dump_json(exclude_none=True)))
 
 
 class FakeCloudLogger:
