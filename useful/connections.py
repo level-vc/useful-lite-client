@@ -41,9 +41,9 @@ class CloudLogger:
         self.api_key = api_key
         self.tasks = []
         self.API_ENDPOINT = (
-            "https://8o2881lhg6.execute-api.us-east-2.amazonaws.com/prod/error"
+            "https://lite.api.usefulmachines.dev/dev/error"
             if dev_mode
-            else "https://8o2881lhg6.execute-api.us-east-2.amazonaws.com/prod/error"
+            else "https://lite.api.usefulmachines.dev/dev/error"
         )
 
     def upload_task(self, endpoint, data):
