@@ -15,7 +15,6 @@ packages = [{ include = "useful" }]
 
 [tool.poetry.dependencies]
 python = "^3.9.0,<3.13"
-nest-asyncio = "^1.5.8"
 pydantic = "^2.5.2"
 python-dotenv = "^1.0.1"
 requests = "^2.31.0"

@@ -45,8 +45,6 @@ def check(
             try:
                 started_at = __get_current_micros()
                 return func(*args, **kwargs)
-                finished_at = __get_current_micros()
-                logging.info(f"[TIME] ended at: {finished_at}")
             except Exception as e:
                 # [end] function log here
                 payload = FunctionError(
@@ -58,7 +56,6 @@ def check(
                 )
                 print(payload)
                 logger.upload_error(payload)
-                logger.wait()
                 raise e  # noqa: TRY201
 
         return useful_wrapper
