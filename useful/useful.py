@@ -46,13 +46,23 @@ def check(
                 started_at = __get_current_micros()
                 return func(*args, **kwargs)
             except Exception as e:
+                tb_lines = traceback.format_exc().splitlines()
+                print(tb_lines)
+
+                filtered_tb = [
+                    line
+                    for line in tb_lines
+                    if "useful_wrapper" not in line
+                    and "return func(*args, **kwargs)" not in line
+                ]
+                final_traceback = "\n".join(filtered_tb)
                 # [end] function log here
                 payload = FunctionError(
                     function_name=func.__name__,
                     function_file=inspect.getfile(func),
                     started_at=started_at,
                     finished_at=__get_current_micros(),
-                    error=traceback.format_exc(),
+                    error=final_traceback,
                 )
                 print(payload)
                 logger.upload_error(payload)
