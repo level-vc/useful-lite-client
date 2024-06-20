@@ -1,6 +1,6 @@
 [tool.poetry]
-name = "useful-machines-lite"
-version = "0.0.99"
+name = "useful-machines"
+version = "0.1.0"
 description = "The python sdk for useful."
 license = "MIT"
 authors = [
