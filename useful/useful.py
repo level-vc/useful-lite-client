@@ -47,7 +47,6 @@ def check(
                 return func(*args, **kwargs)
             except Exception as e:
                 tb_lines = traceback.format_exc().splitlines()
-                print(tb_lines)
 
                 filtered_tb = [
                     line
@@ -64,7 +63,6 @@ def check(
                     finished_at=__get_current_micros(),
                     error=final_traceback,
                 )
-                print(payload)
                 logger.upload_error(payload)
                 raise e  # noqa: TRY201
 
